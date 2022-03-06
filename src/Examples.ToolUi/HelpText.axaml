@@ -1,0 +1,50 @@
+<toolUi:DialogContentBase xmlns="https://github.com/avaloniaui"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:toolUi="clr-namespace:Examples.ToolUi"
+                          mc:Ignorable="d"
+                          d:DesignWidth="800"
+                          d:DesignHeight="450"
+                          x:Class="Examples.ToolUi.HelpText"
+                          Title="Help"
+                          Width="80"
+                          d:DataContext="{d:DesignInstance toolUi:HelpText}">
+    <StackPanel>
+        <StackPanel.Styles>
+            <Style Selector="TextBlock.t">
+                <Setter Property="TextWrapping"
+                        Value="Wrap" />
+                <Setter Property="Margin"
+                        Value="0,0,0,1" />
+            </Style>
+            <Style Selector="Button"/>
+        </StackPanel.Styles>
+        <TextBlock Text="Thank you for using Dotnet Tools UI!"
+                   Classes="t" />
+        <TextBlock
+            Text="This tool is built using Consolonia SDK which is built on top of Avalonia SDK. Please, consider supporting any of this."
+            Classes="t" />
+        <TextBlock
+            Text="THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT."
+            Classes="t" />
+        <StackPanel HorizontalAlignment="Left">
+            <Button Content="Support Page (F1)"
+                    HotKey="F1"
+                    Tag="https://github.com/jinek/ToolUI"
+                    Command="{Binding Navigate}"
+                    CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}" 
+                    Classes="SpecialButton"/>
+            <Button Content="Consolonia (F2)"
+                    HotKey="F2"
+                    Tag="https://github.com/jinek/Consolonia"
+                    Command="{Binding Navigate}"
+                    CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}" />
+            <Button Content="Avalonia UI (F3)"
+                    HotKey="F3"
+                    Tag="https://avaloniaui.net"
+                    Command="{Binding Navigate}"
+                    CommandParameter="{Binding Tag, RelativeSource={RelativeSource Mode=Self}}" />
+        </StackPanel>
+    </StackPanel>
+</toolUi:DialogContentBase>

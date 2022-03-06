@@ -1,0 +1,75 @@
+<dialog:DialogWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:dialog="clr-namespace:Consolonia.Themes.TurboVision.Templates.Controls.Dialog;assembly=Consolonia.Themes.TurboVision"
+                     xmlns:toolUi="clr-namespace:Examples.ToolUi"
+                     mc:Ignorable="d"
+                     d:DesignWidth="800"
+                     d:DesignHeight="450"
+                     Title="Search Results"
+                     x:Class="Examples.ToolUi.SearchResults"
+                     MinWidth="100"
+                     MinHeight="4"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Padding="0,0,0,-1"
+                     d:DataContext="{d:DesignInstance toolUi:SearchResults}">
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom"
+              ColumnDefinitions="* * * * 2"
+              HorizontalAlignment="Center">
+            <Button Content="Install (Enter)"
+                    Grid.Column="0"
+                    IsDefault="True"
+                    HotKey="Enter"
+                    Command="{Binding Install}" />
+            <Button Content="Install Global (F2)"
+                    Grid.Column="1"
+                    Classes="SpecialButton"
+                    HotKey="F2"
+                    Command="{Binding InstallGlobal}" />
+            <Button Content="New Search (F7)"
+                    Grid.Column="2"
+                    HotKey="F7"
+                    Command="{Binding SearchAgain}" />
+            <Button Content="Cancel (Esc)"
+                    Grid.Column="3"
+                    HotKey="Escape"
+                    Command="{Binding CancelDialog}"/>
+        </Grid>
+        <Rectangle Height="1"
+                   DockPanel.Dock="Bottom"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center"
+                   Stroke="{StaticResource ThemeBorderBrush}"
+                   StrokeThickness="1"
+                   Margin="-1,0">
+        </Rectangle>
+        <TextBlock DockPanel.Dock="Top"
+                   Text="Only first page is shown"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,1,0"
+                   Foreground="{StaticResource ThemeNoDisturbBrush}" />
+        <StackPanel Margin="-1,0,-1,-1">
+            <DataGrid Items="{Binding SearchRows}"
+                      AutoGenerateColumns="False"
+                      toolUi:UIExtensions.FocusOnLoad="True"
+                      x:Name="SearchDataGrid"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"
+                                        Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Version"
+                                        Binding="{Binding Version}" />
+                    <DataGridTextColumn Header="Authors"
+                                        Binding="{Binding Authors}" />
+                    <DataGridTextColumn Header="Downloads"
+                                        Binding="{Binding Downloads}" />
+                    <DataGridTextColumn Header="Verified"
+                                        Binding="{Binding Verified}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </DockPanel>
+</dialog:DialogWindow>
