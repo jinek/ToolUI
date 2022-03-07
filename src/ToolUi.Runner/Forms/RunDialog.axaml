@@ -2,7 +2,6 @@
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                          xmlns:toolUi="clr-namespace:Examples.ToolUi"
                           xmlns:dialog="clr-namespace:ToolUi.Runner.Dialog"
                           xmlns:forms="clr-namespace:ToolUi.Runner.Forms"
                           xmlns:runtime="clr-namespace:ToolUi.Runner.Runtime"
