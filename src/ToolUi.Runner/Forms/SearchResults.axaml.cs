@@ -3,8 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Consolonia.Themes.TurboVision.Templates.Controls.Dialog;
 using DynamicData;
-using Examples.ToolUi;
-using Examples.ToolUi.Data;
+using ToolUi.Runner.Data;
 using ToolUi.Runner.Runtime;
 
 namespace ToolUi.Runner.Forms

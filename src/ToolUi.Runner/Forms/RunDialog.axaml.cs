@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Examples.ToolUi;
 using ToolUi.Runner.Dialog;
 using ToolUi.Runner.Runtime;
 

@@ -1,7 +1,6 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Examples.ToolUi;
 using ToolUi.Runner.Dialog;
 using ToolUi.Runner.Runtime;
 
@@ -18,7 +17,10 @@ namespace ToolUi.Runner.Forms
                 question = question[..maxSymbols];
 
             TextBlock.Text = question;
-            AttachedToVisualTree += (_, _) => { ResultChanged(new object()); };
+            AttachedToVisualTree += (_, _) =>
+            {
+                ResultChanged(new object());
+            };
         }
 
         public OkCancel()

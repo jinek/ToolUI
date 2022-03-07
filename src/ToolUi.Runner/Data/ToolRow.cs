@@ -1,4 +1,4 @@
-namespace Examples.ToolUi.Data
+namespace ToolUi.Runner.Data
 {
     public record ToolRow(string Id, string Version, string Commands, string Manifest)
     {

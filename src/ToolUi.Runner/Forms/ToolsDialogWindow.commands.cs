@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using DynamicData;
-using Examples.ToolUi.Data;
+using ToolUi.Runner.Data;
 using ToolUi.Runner.Dialog;
 using ToolUi.Runner.Runtime;
 

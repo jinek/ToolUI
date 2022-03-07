@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Examples.ToolUi;
 using ToolUi.Runner.Runtime;
 
 namespace ToolUi.Runner.Dialog
@@ -58,7 +57,7 @@ namespace ToolUi.Runner.Dialog
                 commonDialogWindow.IsEnterEnabled = obj != null;
             }
 
-            void OkButtonClicked(object? sender, RoutedEventArgs e)
+            void OkButtonClicked(object sender, RoutedEventArgs e)
             {
                 taskCompletionSource.SetResult(result);
                 commonDialogWindow.CloseDialog();
