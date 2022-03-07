@@ -206,6 +206,8 @@ namespace ToolUi.Runner.Forms
                     return;
 
                 string packageId = searchResultsDialog.RowToInstall.Id;
+                string version = searchResultsDialog.RowToInstall.Version;
+                
                 bool installGlobally = searchResultsDialog.InstallGlobally;
 
                 await new OkCancel(
@@ -216,6 +218,7 @@ namespace ToolUi.Runner.Forms
                     .ShowDialog(this);
                 string command = $"tool install {packageId}";
                 command += installGlobally ? " --global" : " --local";
+                command += $" --version {version}";
 
                 var installationStrings =
                     await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Installing {packageId}", true, command);
