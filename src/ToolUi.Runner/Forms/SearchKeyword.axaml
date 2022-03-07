@@ -23,6 +23,7 @@
                    Stroke="{StaticResource ThemeBorderBrush}"
                    StrokeThickness="1"
                    Margin="-3,0" />
-        <CheckBox Content="Include pre-release" />
+        <CheckBox Content="Include pre-release" 
+                  IsChecked="{Binding Prerelease}"/>
     </StackPanel>
 </dialog:DialogContentBase>
