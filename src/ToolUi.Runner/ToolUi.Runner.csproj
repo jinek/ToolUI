@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>ToolUi.Runner</RootNamespace>
+        <AssemblyName>ToolUi.Runner</AssemblyName>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <AvaloniaVersion>0.10.12</AvaloniaVersion>
+        <ConsloniaVersion>0.10.12-alpha-4</ConsloniaVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="CliWrap" Version="3.4.1" />
+        <PackageReference Include="Consolonia.Themes.TurboVision" Version="$(ConsloniaVersion)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Dialog\CommonDialogWindow.axaml.cs">
+        <DependentUpon>CommonDialogWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\HelpText.axaml.cs">
+        <DependentUpon>HelpText.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\OkCancel.axaml.cs">
+        <DependentUpon>OkCancel.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\RunDialog.axaml.cs">
+        <DependentUpon>RunDialog.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\SearchKeyword.axaml.cs">
+        <DependentUpon>SearchKeyword.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\SearchResults.axaml.cs">
+        <DependentUpon>SearchResults.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\ToolsDialogWindow.axaml.cs">
+        <DependentUpon>ToolsDialogWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Runtime\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Forms\ToolsDialogWindow.commands.cs">
+        <DependentUpon>ToolsDialogWindow.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Forms\ToolsDialogWindow.operation.cs">
+        <DependentUpon>ToolsDialogWindow.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples.ToolUi", "Examples.ToolUi\Examples.ToolUi.csproj", "{2325AC88-A24A-4F57-AA79-032EE80B8A55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolUi.Runner", "ToolUi.Runner\ToolUi.Runner.csproj", "{2325AC88-A24A-4F57-AA79-032EE80B8A55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

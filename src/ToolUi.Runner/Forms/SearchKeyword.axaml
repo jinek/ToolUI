@@ -1,0 +1,28 @@
+<dialog:DialogContentBase xmlns="https://github.com/avaloniaui"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:dialog="clr-namespace:ToolUi.Runner.Dialog"
+                          xmlns:runtime="clr-namespace:ToolUi.Runner.Runtime"
+                          xmlns:forms="clr-namespace:ToolUi.Runner.Forms"
+                          mc:Ignorable="d"
+                          d:DesignWidth="800"
+                          d:DesignHeight="450"
+                          x:Class="ToolUi.Runner.Forms.SearchKeyword"
+                          Width="60"
+                          VerticalAlignment="Center"
+                          d:DataContext="{d:DesignInstance forms:SearchKeyword}">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="Keyword to search by:" />
+        <TextBox Text="{Binding Keyword}"
+                 runtime:UIExtensions.FocusOnLoad="True" />
+        <Rectangle Height="1"
+                   DockPanel.Dock="Bottom"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Center"
+                   Stroke="{StaticResource ThemeBorderBrush}"
+                   StrokeThickness="1"
+                   Margin="-3,0" />
+        <CheckBox Content="Include pre-release" />
+    </StackPanel>
+</dialog:DialogContentBase>
