@@ -78,14 +78,15 @@ namespace ToolUi.Runner.Forms
                 (string id, string _, string toolCommand, string manifest) = SelectedTool;
 
                 // Only one command https://github.com/dotnet/sdk/issues/10014
-                string command = $"tool run {toolCommand}";
+                bool isGlobal = manifest == ToolRow.GlobalManifestKey;
+                string command = isGlobal ? $"{RemoveDotnetEscape} {toolCommand}" : $"tool run {toolCommand}";
 
                 string helpString;
 
                 try
                 {
                     var helpStrings = await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Getting help for {id}", true,
-                        command + " -- --help");
+                        (command + (isGlobal ? " --help" : " -- --help")).Split());
                     helpString = string.Join("\n", helpStrings.Select(str => str.str));
                 }
                 catch (OperationErrorException operationErrorException)
@@ -102,9 +103,13 @@ namespace ToolUi.Runner.Forms
 
 
                 if (!string.IsNullOrEmpty(parameters))
-                    command += $" -- {parameters}";
+                {
+                    if (!isGlobal)
+                        command += " --";
+                    command += $" {parameters}";
+                }
 
-                var runStrings = await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Running {id}", true, command);
+                var runStrings = await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Running {id}", true, command.Split());
                 if (!runStrings.Any()) runStrings = new[] { new RawStringRow("Completed.") };
 
                 await new OkCancel(string.Join("\n", runStrings.Select(str => str.str)))
@@ -121,7 +126,7 @@ namespace ToolUi.Runner.Forms
             {
                 ToolRow selectedTool = SelectedTool;
                 string dotnetArguments = "tool update ";
-                if (selectedTool.Manifest == ToolRow.ManifestKeyword)
+                if (selectedTool.Manifest == ToolRow.GlobalManifestKey)
                     dotnetArguments += "--global ";
                 dotnetArguments += selectedTool.Id;
                 await ExecuteDotnetAsync($"Updating {selectedTool.Id}", true, dotnetArguments);
@@ -166,7 +171,7 @@ namespace ToolUi.Runner.Forms
                     }
                     .ShowDialog(this);
                 string command = $"tool uninstall {id}";
-                if (manifest == ToolRow.ManifestKeyword)
+                if (manifest == ToolRow.GlobalManifestKey)
                     command += " --global";
                 var installationStrings =
                     await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Uninstalling {id}", true, command);
@@ -224,7 +229,7 @@ namespace ToolUi.Runner.Forms
                 await RefreshInternal();
 
                 ToolRow itemToSelect = ToolsList.SingleOrDefault(tool =>
-                    tool.Id == packageId && (tool.Manifest == ToolRow.ManifestKeyword) ^ !installGlobally);
+                    tool.Id == packageId && (tool.Manifest == ToolRow.GlobalManifestKey) ^ !installGlobally);
 
                 if (itemToSelect != null) // can be null if uninstalled outside
                     ToolsTable.SelectedItem = itemToSelect;

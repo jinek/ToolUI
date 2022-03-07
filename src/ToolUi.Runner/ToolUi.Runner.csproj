@@ -15,7 +15,7 @@
 
         <IsPackable>true</IsPackable>        
         <PackAsTool>true</PackAsTool>
-        <ToolCommandName>ui</ToolCommandName>        
+        <ToolCommandName>dotnet-ui</ToolCommandName>        
     </PropertyGroup>
 
     <PropertyGroup>

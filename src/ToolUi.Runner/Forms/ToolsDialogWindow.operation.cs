@@ -14,6 +14,7 @@ namespace ToolUi.Runner.Forms
 {
     public partial class ToolsDialogWindow
     {
+        private const string RemoveDotnetEscape = @"-dotnet/"; 
 
         private void Output(string line)
         {
@@ -32,7 +33,14 @@ namespace ToolUi.Runner.Forms
             var output = new List<string>();
             ProgressBar progressBar = ProgressBar;
 
-            Output($@"{Environment.CurrentDirectory}> dotnet {string.Join(' ', dotnetArguments)}");
+            string command = "dotnet";
+            if (dotnetArguments.Any() && dotnetArguments[0].StartsWith(RemoveDotnetEscape))
+            {
+                command = dotnetArguments[1];
+                dotnetArguments = dotnetArguments.Skip(2).ToArray();
+            }
+
+            Output($@"{Environment.CurrentDirectory}> {command} {string.Join(' ', dotnetArguments)}");
             
             try
             {
@@ -57,7 +65,7 @@ namespace ToolUi.Runner.Forms
                 CommandResult cliResult;
                 try
                 {
-                    cliResult = await Cli.Wrap("dotnet")
+                    cliResult = await Cli.Wrap(command)
                         .WithArguments(dotnetArguments, false)
                         .WithValidation(CommandResultValidation.None)
                         .WithStandardOutputPipe(PipeTarget.ToDelegate(HandleLine))
@@ -70,7 +78,7 @@ namespace ToolUi.Runner.Forms
                 }
 
                 int exitCode = cliResult.ExitCode;
-                
+
                 if (exitCode != 0)
                     throw new OperationErrorException(
                         errorStringBuilder + Environment.NewLine + string.Join('\n', output), exitCode);
