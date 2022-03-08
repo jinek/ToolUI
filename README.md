@@ -1,6 +1,6 @@
 # ToolUI
 
-This application has been built using [Consolonia](https://github.com/jinek/Consolonia)
+This application has been built using [Consolonia](https://github.com/jinek/Consolonia) and [CliWrap](https://github.com/Tyrrrz/CliWrap)
 
 ## Screenshots
 ![tooluiMainPage3](https://user-images.githubusercontent.com/10516222/156970874-8e7d07b8-9a2b-44ef-bf6f-e3f846771543.png)
