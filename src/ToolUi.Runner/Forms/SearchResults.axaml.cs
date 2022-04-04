@@ -44,16 +44,12 @@ namespace ToolUi.Runner.Forms
 
         public bool SearchMore { get; private set; }
 
-        private void Install()
+        private async void Install()
         {
-            RowToInstall = (SearchRow)SearchDataGrid.SelectedItem;
+            var dialog = new SearchDetails((SearchRow)SearchDataGrid.SelectedItem);
+            await dialog.ShowDialogAsync(this);
+            RowToInstall = dialog.SearchRow;
             CloseDialog();
-        }
-
-        private void InstallGlobal()
-        {
-            InstallGlobally = true;
-            Install();
         }
 
         public bool InstallGlobally { get; private set; }

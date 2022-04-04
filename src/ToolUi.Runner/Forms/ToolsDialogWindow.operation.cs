@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using CliWrap;
+using ToolUi.Runner.Data;
 using ToolUi.Runner.Dialog;
 using ToolUi.Runner.Runtime;
 
@@ -23,10 +26,10 @@ namespace ToolUi.Runner.Forms
 
         private Task ExecuteDotnetAsync(string title, bool isCancellable, params string[] dotnetArguments)
         {
-            return ExecuteDotnetAsync<object>(0, 0, title, isCancellable, dotnetArguments);
+            return ExecuteDotnetAsync<object>(0, title, isCancellable, dotnetArguments);
         }
 
-        private async Task<T[]> ExecuteDotnetAsync<T>(int parametersNumber, int skipRows, string title,
+        private async Task<T[]> ExecuteDotnetAsync<T>(int skipRows, string title,
             bool isCancellable,
             params string[] dotnetArguments)
         {
@@ -53,7 +56,7 @@ namespace ToolUi.Runner.Forms
                 if (isCancellable)
                 {
                     _currentCommandCts = new CancellationTokenSource();
-                    ProgressTextBlock.Text += " [ Cancel (Esc)]";
+                    ProgressTextBlock.Text += " [ Cancel (Esc) ]";
                 }
 
                 ProgressPanel.IsVisible = true;
@@ -61,7 +64,7 @@ namespace ToolUi.Runner.Forms
                 InteractionBorder.IsEnabled = false;
 
                 var errorStringBuilder = new StringBuilder();
-
+                
                 CommandResult cliResult;
                 try
                 {
@@ -76,7 +79,7 @@ namespace ToolUi.Runner.Forms
                 {
                     throw new OperationAbortException();
                 }
-
+                
                 int exitCode = cliResult.ExitCode;
 
                 if (exitCode != 0)
@@ -84,26 +87,11 @@ namespace ToolUi.Runner.Forms
                         errorStringBuilder + Environment.NewLine + string.Join('\n', output), exitCode);
 
                 await Dispatcher.UIThread.InvokeAsync(() => { progressBar.Value = 100; });
-                await Task.Delay(500);
+                await Task.Delay(300);
 
-                if (parametersNumber == 0) return null;
+                if (typeof(T) == typeof(object)) return null;
 
-                return output.Skip(skipRows)
-                    .Select(str =>
-                    {
-                        object[] constructorParameters = str.Split("  ",
-                                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
-                            .Take(parametersNumber)
-                            .Cast<object>()
-                            .ToArray();
-
-                        int dummyNumberToAdd = parametersNumber - constructorParameters.Length;
-                        if (dummyNumberToAdd > 0)
-                            constructorParameters = constructorParameters
-                                .Concat(Enumerable.Repeat((string)null, dummyNumberToAdd)).ToArray();
-
-                        return (T)Activator.CreateInstance(typeof(T), constructorParameters);
-                    }).ToArray(); //todo: change to delayed execution
+                return ParseOutput<T>(string.Join("\n", output.Skip(skipRows)));
             }
             finally
             {
@@ -122,6 +110,20 @@ namespace ToolUi.Runner.Forms
                 });
                 output.Add(line);
             }
+        }
+
+        private static TRow[] ParseOutput<TRow>(string output)
+        {
+            Type rowType = typeof(TRow);
+            var regex = new Regex(rowType.GetCustomAttribute<ParsableAttribute>().Regexp,RegexOptions.Multiline);
+            MatchCollection matches = regex.Matches(output);
+            ConstructorInfo constructorInfo = rowType.GetConstructors().Single();
+            var parameterInfos = constructorInfo.GetParameters();
+
+            return matches.Select(match=>(TRow)constructorInfo.Invoke(
+                parameterInfos.Select(parameterInfo => parameterInfo.ParameterType.IsArray
+                    ? (object)match.Groups[parameterInfo.Name].Captures.Select(capture => capture.Value.Trim()).ToArray()
+                    : match.Groups[parameterInfo.Name].Value.Trim()).ToArray())).ToArray();
         }
 
         private async void CatchOperationAbort(Func<Task> action)

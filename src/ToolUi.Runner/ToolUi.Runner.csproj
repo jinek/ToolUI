@@ -24,10 +24,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)"/>
-        <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
-        <PackageReference Include="CliWrap" Version="3.4.1"/>
-        <PackageReference Include="Consolonia.Themes.TurboVision" Version="$(ConsloniaVersion)"/>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="CliWrap" Version="3.4.1" />
+        <PackageReference Include="Consolonia.Themes.TurboVision" Version="0.10.12-alpha-76" />
+        <PackageReference Include="DynamicData" Version="7.1.1" />
     </ItemGroup>
 
     <ItemGroup>

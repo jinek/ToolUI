@@ -19,7 +19,7 @@ namespace ToolUi.Runner.Forms
             CatchOperationAbort(async () =>
             {
                 var output =
-                    await ExecuteDotnetAsync<RawStringRow>(1, 0, "Manifest initialization...", true,
+                    await ExecuteDotnetAsync<RawStringRow>(0, "Manifest initialization...", true,
                         "new tool-manifest");
 
                 await new OkCancel(string.Join('\n', output.Select(s => s.str)))
@@ -34,10 +34,10 @@ namespace ToolUi.Runner.Forms
         {
             // await ExecuteDotnetAsync("Initializing...", "--info");
 
-            var localTools = await ExecuteDotnetAsync<ToolRow>(4, 2, "Reading local tools", false, "tool list");
+            var localTools = await ExecuteDotnetAsync<ToolRow>(2, "Reading local tools", false, "tool list");
 
             var globalTools =
-                await ExecuteDotnetAsync<ToolRow>(3, 2, "Reading global tools", false, "tool list --global");
+                await ExecuteDotnetAsync<ToolRow>(2, "Reading global tools", false, "tool list --global");
 
             ToolsList.Clear();
             ToolsList.AddRange(localTools);
@@ -85,7 +85,7 @@ namespace ToolUi.Runner.Forms
 
                 try
                 {
-                    var helpStrings = await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Getting help for {id}", true,
+                    var helpStrings = await ExecuteDotnetAsync<RawStringRow>(0, $"Getting help for {id}", true,
                         (command + (isGlobal ? " --help" : " -- --help")).Split());
                     helpString = string.Join("\n", helpStrings.Select(str => str.str));
                 }
@@ -109,7 +109,7 @@ namespace ToolUi.Runner.Forms
                     command += $" {parameters}";
                 }
 
-                var runStrings = await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Running {id}", true, command.Split());
+                var runStrings = await ExecuteDotnetAsync<RawStringRow>(0, $"Running {id}", true, command.Split());
                 if (!runStrings.Any()) runStrings = new[] { new RawStringRow("Completed.") };
 
                 await new OkCancel(string.Join("\n", runStrings.Select(str => str.str)))
@@ -174,7 +174,7 @@ namespace ToolUi.Runner.Forms
                 if (manifest == ToolRow.GlobalManifestKey)
                     command += " --global";
                 var installationStrings =
-                    await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Uninstalling {id}", true, command);
+                    await ExecuteDotnetAsync<RawStringRow>(0, $"Uninstalling {id}", true, command);
                 await new OkCancel(string.Join("\n", installationStrings.Select(str => str.str)))
                 {
                     Title = "Tool Uninstalled",
@@ -194,10 +194,10 @@ namespace ToolUi.Runner.Forms
                 do
                 {
                     (string keyword, bool prerelease) = ((string, bool))await new SearchKeyword().ShowDialog(this);
-                    string parameters = @$"tool search ""{keyword}""";
+                    string parameters = @$"tool search ""{keyword}"" --detail";
                     if (prerelease) parameters += " --prerelease";
                     var searchRows =
-                        await ExecuteDotnetAsync<SearchRow>(5, 2, $"Searching \"{keyword}\"", true, parameters);
+                        await ExecuteDotnetAsync<SearchRow>(0, $"Searching \"{keyword}\"", true, parameters);
                     searchResultsDialog = new SearchResults(searchRows);
                     await searchResultsDialog.ShowDialogAsync(this);
                 } while (searchResultsDialog.SearchMore);
@@ -221,7 +221,7 @@ namespace ToolUi.Runner.Forms
                 command += $" --version {version}";
 
                 var installationStrings =
-                    await ExecuteDotnetAsync<RawStringRow>(1, 0, $"Installing {packageId}", true, command);
+                    await ExecuteDotnetAsync<RawStringRow>(0, $"Installing {packageId}", true, command);
 
                 await new OkCancel(string.Join("\n", installationStrings.Select(str => str.str)))
                 {

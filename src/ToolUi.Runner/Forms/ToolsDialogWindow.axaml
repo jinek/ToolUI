@@ -26,12 +26,12 @@
                    DockPanel.Dock="Bottom"
                    ZIndex="1"
                    Height="2"
-                   Margin="0,-2,0,0">
+                   Margin="0,-2,-1,0">
                 <ProgressBar x:Name="ProgressBar"
                              IsIndeterminate="False"
                              VerticalAlignment="Top"
                              ShowProgressText="True"
-                             Margin="0,0" />
+                             Margin="0,0,1,0" />
                 <StackPanel Orientation="Horizontal"
                             Margin="0,0"
                             VerticalAlignment="Top"
