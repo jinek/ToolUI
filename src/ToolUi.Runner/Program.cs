@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Avalonia;
 using Consolonia.Core;
+using Consolonia.Core.Infrastructure;
+using Consolonia.PlatformSupport;
 
 namespace ToolUi.Runner
 {
@@ -16,7 +19,11 @@ namespace ToolUi.Runner
             };
 
             //todo: setup error handler
-            ApplicationStartup.StartConsolonia<App>();
+            AppBuilder.Configure<App>()
+                .UseConsolonia()
+                .UseAutoDetectedConsole()
+                .LogToException()
+                .StartWithConsoleLifetime(Array.Empty<string>());
         }
     }
 }

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>ToolUi.Runner</RootNamespace>
         <AssemblyName>ToolUi.Runner</AssemblyName>        
     </PropertyGroup>
@@ -20,14 +20,15 @@
 
     <PropertyGroup>
         <AvaloniaVersion>0.10.12</AvaloniaVersion>
-        <ConsloniaVersion>0.10.12-alpha-4</ConsloniaVersion>
+        <ConsoloniaVersion>0.10.12-alpha-130</ConsoloniaVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />        
         <PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
         <PackageReference Include="CliWrap" Version="3.4.1" />
-        <PackageReference Include="Consolonia.Themes.TurboVision" Version="0.10.12-alpha-76" />
+        <PackageReference Include="Consolonia.Themes.TurboVision" Version="$(ConsoloniaVersion)" />
+        <PackageReference Include="Consolonia.PlatformSupport" Version="$(ConsoloniaVersion)" />
         <PackageReference Include="DynamicData" Version="7.1.1" />
     </ItemGroup>
 

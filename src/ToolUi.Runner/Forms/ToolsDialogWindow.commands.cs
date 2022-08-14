@@ -126,6 +126,8 @@ namespace ToolUi.Runner.Forms
             {
                 ToolRow selectedTool = SelectedTool;
                 string dotnetArguments = "tool update ";
+                if (selectedTool == null)
+                    return;
                 if (selectedTool.Manifest == ToolRow.GlobalManifestKey)
                     dotnetArguments += "--global ";
                 dotnetArguments += selectedTool.Id;

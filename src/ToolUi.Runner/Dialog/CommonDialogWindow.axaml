@@ -14,7 +14,8 @@
     <DockPanel>
         <Grid DockPanel.Dock="Bottom"
               ColumnDefinitions="2 * 1 * 2"
-              HorizontalAlignment="Center">
+              HorizontalAlignment="Center"
+              ZIndex="10">
             <Button Content="Enter"
                     Grid.Column="1"
                     IsEnabled="{Binding IsEnterEnabled}"
@@ -34,8 +35,10 @@
                    StrokeThickness="1"
                    Margin="-1,0">
         </Rectangle>
-        <StackPanel Margin="1,1,1,0">
+        <ScrollViewer Margin="1,1,1,0"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
             <ContentPresenter x:Name="ContentPresenter" />
-        </StackPanel>
+        </ScrollViewer>
     </DockPanel>
 </dialog:DialogWindow>
