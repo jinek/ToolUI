@@ -47,25 +47,32 @@
                    HorizontalAlignment="Right"
                    Margin="0,0,1,0"
                    Foreground="{StaticResource ThemeNoDisturbBrush}" />
-        <StackPanel Margin="-1,0,-1,-1">
+        <Panel Margin="-1,0,-1,-1">
             <DataGrid Items="{Binding SearchRows}"
                       AutoGenerateColumns="False"
                       runtime:UIExtensions.FocusOnLoad="True"
                       x:Name="SearchDataGrid"
-                      IsReadOnly="True">
+                      IsReadOnly="True"
+                      HorizontalScrollBarVisibility="Disabled">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id"
-                                        Binding="{Binding Id}" />
+                                        Binding="{Binding Id}" 
+                                        Width="Auto"/>
                     <DataGridTextColumn Header="Version"
-                                        Binding="{Binding Version}" />
+                                        Binding="{Binding Version}" 
+                                        Width="Auto"/>
                     <DataGridTextColumn Header="Authors"
-                                        Binding="{Binding Authors}" />
+                                        Binding="{Binding Authors}" 
+                                        Width="Auto"
+                                        MaxWidth="20"/>
                     <DataGridTextColumn Header="Downloads"
-                                        Binding="{Binding Downloads}" />
+                                        Binding="{Binding Downloads}" 
+                                        Width="Auto"/>
                     <DataGridTextColumn Header="Verified"
-                                        Binding="{Binding Verified}" />
+                                        Binding="{Binding Verified}"
+                                        Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </Panel>
     </DockPanel>
 </dialog:DialogWindow>

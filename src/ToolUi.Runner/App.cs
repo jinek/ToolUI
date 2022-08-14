@@ -1,13 +1,13 @@
 using System;
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml.Styling;
+using Consolonia.Core.Infrastructure;
 using Consolonia.Themes.TurboVision.Themes.TurboVisionDark;
 using ToolUi.Runner.Runtime;
 
 namespace ToolUi.Runner
 {
-    internal class App : Application
+    internal class App : ConsoloniaApplication
     {
         public App()
         {
