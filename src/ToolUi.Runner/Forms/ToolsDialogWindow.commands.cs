@@ -128,6 +128,14 @@ namespace ToolUi.Runner.Forms
                 string dotnetArguments = "tool update ";
                 if (selectedTool == null)
                     return;
+                if (selectedTool.Version.Any(c => !char.IsDigit(c) && c != '.'))
+                {
+                    await new OkCancel("Pre-release version may fail to update if no release version is available. In that case, please remove the tool and install it again manually.")
+                    {
+                        Title = "Pre-release version detected"
+                    }.ShowDialog(this);
+                }
+
                 if (selectedTool.Manifest == ToolRow.GlobalManifestKey)
                     dotnetArguments += "--global ";
                 dotnetArguments += selectedTool.Id;
