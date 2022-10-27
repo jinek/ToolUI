@@ -19,7 +19,7 @@
             <Button Content="Enter"
                     Grid.Column="1"
                     IsEnabled="{Binding IsEnterEnabled}"
-                    IsDefault="True"
+                    IsDefault="{Binding RelativeSource={RelativeSource Self}, Path=IsEffectivelyEnabled}"
                     runtime:UIExtensions.FocusOnLoad="True"
                     x:Name="OkButton" />
             <Button Content="Cancel"

@@ -79,7 +79,7 @@
                             </Button.Flyout>
                         </Button>
                         <Button Content="Run.. (Enter)"
-                                IsDefault="True"
+                                HotKey="Enter"
                                 Grid.Column="2"
                                 Classes="SpecialButton" />
                         <Button Content="Search/Install... (F7)"
