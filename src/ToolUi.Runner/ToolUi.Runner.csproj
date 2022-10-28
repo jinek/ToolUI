@@ -7,8 +7,7 @@
         <AssemblyName>ToolUi.Runner</AssemblyName>        
     </PropertyGroup>
     
-    <PropertyGroup>
-        <VersionPrefix>1.0.0</VersionPrefix>
+    <PropertyGroup>        
         <Authors>Evgeny Gorbovoy</Authors>
         <Description>Text user interface for managing other dotnet tools</Description>
         <Copyright>Copyright © Evgeny Gorbovoy 2021 - 2022</Copyright>

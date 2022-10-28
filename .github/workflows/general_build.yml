@@ -24,8 +24,8 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore --configuration release
-      - name: Pack
-        run: dotnet pack --configuration release -o ./packages --version-suffix ${{ github.run_number }} # https://stackoverflow.com/a/60067489/2362847
+      - name: Pack        
+        run: dotnet pack --configuration release -o ./packages -p:PackageVersion=1.1.${{ github.run_number }} # https://stackoverflow.com/a/60067489/2362847
       - name: Push
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main'}}
         run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json
