@@ -7,15 +7,15 @@
         <AssemblyName>ToolUi.Runner</AssemblyName>        
     </PropertyGroup>
     
-    <PropertyGroup>
-        <VersionPrefix>0.10.18</VersionPrefix>
+    <PropertyGroup>        
         <Authors>Evgeny Gorbovoy</Authors>
         <Description>Text user interface for managing other dotnet tools</Description>
         <Copyright>Copyright © Evgeny Gorbovoy 2021 - 2022</Copyright>
 
+        <PackageId>ToolUI</PackageId>
         <IsPackable>true</IsPackable>        
         <PackAsTool>true</PackAsTool>
-        <ToolCommandName>dotnet-ui</ToolCommandName>        
+        <ToolCommandName>dotnet-toolui</ToolCommandName>        
     </PropertyGroup>
 
     <PropertyGroup>

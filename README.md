@@ -12,13 +12,13 @@ Quick start video: https://youtu.be/-8zvnZgi1us
 
 Locally:
 ```
-dotnet tool install toolui.runner --version 0.10.12-alpha-5
-dotnet tool run dotnet-ui
-dotnet tool uninstall toolui.runner
+dotnet tool install ToolUI
+dotnet tool run dotnet-toolui
+dotnet tool uninstall ToolUI
 ```
 Globally:
 ```
-dotnet tool install toolui.runner --global --version 0.10.12-alpha-5
-dotnet-ui
-dotnet tool uninstall toolui.runner --global
+dotnet tool install ToolUI --global 
+dotnet-toolui
+dotnet tool uninstall ToolUI --global
 ```
