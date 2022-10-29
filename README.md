@@ -1,5 +1,7 @@
 # ToolUI
 
+Helps to manage dotnet tools.
+
 This application has been built using [Consolonia](https://github.com/jinek/Consolonia) and [CliWrap](https://github.com/Tyrrrz/CliWrap)
 
 Quick start video: https://youtu.be/MOltIKesqvk
@@ -19,6 +21,6 @@ dotnet tool uninstall ToolUI
 Globally:
 ```
 dotnet tool install ToolUI --global 
-dotnet-toolui
+dotnet toolui
 dotnet tool uninstall ToolUI --global
 ```
