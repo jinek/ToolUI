@@ -1,5 +1,5 @@
 namespace ToolUi.Runner.Data
 {
-    [Parsable(@"[\a\n](?<str>.+)$")]
+    [Parsable(@"^(?<str>.+)$")]
     public record RawStringRow(string str);
 }
