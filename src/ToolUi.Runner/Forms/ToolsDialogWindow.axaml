@@ -81,7 +81,8 @@
                         <Button Content="Run.. (Enter)"
                                 HotKey="Enter"
                                 Grid.Column="2"
-                                Classes="SpecialButton" />
+                                Classes="SpecialButton" 
+                                Command="{Binding RunTool}"/>
                         <Button Content="Search/Install... (F7)"
                                 Grid.Column="3"
                                 HotKey="F7"
